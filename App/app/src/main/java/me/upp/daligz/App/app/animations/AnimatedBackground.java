@@ -8,15 +8,16 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import me.upp.daligz.App.app.R;
 
-public class AnimatedBackground extends Animation {
+public class AnimatedBackground {
+
+    private final AppCompatActivity appCompatActivity;
 
     public AnimatedBackground(final @NonNull AppCompatActivity appCompatActivity) {
-        super(appCompatActivity);
+        this.appCompatActivity = appCompatActivity;
     }
 
-    @Override
     public void run() {
-        final ConstraintLayout constraintLayout = this.getAppCompatActivity().findViewById(R.id.layout);
+        final ConstraintLayout constraintLayout = this.appCompatActivity.findViewById(R.id.layout);
         final AnimationDrawable animatedBackground = (AnimationDrawable) constraintLayout.getBackground();
         animatedBackground.setEnterFadeDuration(2000);
         animatedBackground.setExitFadeDuration(4000);
