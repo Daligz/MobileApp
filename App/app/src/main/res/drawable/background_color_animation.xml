@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@color/palette_yellow"
+        android:duration="4000"/>
+
+    <item android:drawable="@color/palette_pink"
+        android:duration="4000"/>
+
+    <item android:drawable="@color/palette_cream"
+        android:duration="4000"/>
+
+    <item android:drawable="@color/palette_purple"
+        android:duration="4000"/>
+
+    <item android:drawable="@color/palette_pink_purple"
+        android:duration="4000"/>
+
+</animation-list>
