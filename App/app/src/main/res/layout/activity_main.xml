@@ -18,7 +18,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/imageViewer"
                 android:layout_width="match_parent"
                 android:layout_height="221dp"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
