@@ -25,5 +25,11 @@
             <artifactId>spark-core</artifactId>
             <version>2.9.3</version>
         </dependency>
+        <!-- Private repo -->
+        <dependency>
+            <groupId>net.royalmind.minecraft.plugin.minigamecluster</groupId>
+            <artifactId>MySQL-API</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 </project>
