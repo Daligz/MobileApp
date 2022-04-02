@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum TablePosts {
+    TABLE_NAME("Posts"),
     ID("postsId"),
     URL("url"),
     RATE("rate"),
