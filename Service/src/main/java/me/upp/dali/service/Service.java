@@ -9,5 +9,6 @@ public class Service {
         final Connector connector = new Connector();
         Spark.port(6969);
         Spark.get("/test", (request, response) -> "test request!");
+        connector.close();
     }
 }

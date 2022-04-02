@@ -23,12 +23,13 @@ public class Connector {
     private void createTables() {
         final String postsTableQuery = new CreateTableQuery(TablePosts.TABLE_NAME.getValue())
                 .ifNotExists()
-                .column(TablePosts.ID.getValue(), "VARCHAR NOT NULL")
-                .column(TablePosts.URL.getValue(), "VARCHAR NOT NULL")
+                .column(TablePosts.ID.getValue(), "INT AUTO_INCREMENT")
+                .column(TablePosts.URL.getValue(), "VARCHAR(100) NOT NULL")
                 .column(TablePosts.RATE.getValue(), "INT NOT NULL")
-                .column(TablePosts.CATEGORY.getValue(), "VARCHAR NOT NULL")
+                .column(TablePosts.CATEGORY.getValue(), "VARCHAR(100) NOT NULL")
                 .primaryKey(TablePosts.ID.getValue())
                 .build();
+        System.out.println(postsTableQuery);
         new Query(this.mySQL, postsTableQuery).executeUpdateAsync();
     }
 
