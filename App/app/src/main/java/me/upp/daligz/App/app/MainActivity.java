@@ -1,12 +1,10 @@
 package me.upp.daligz.App.app;
 
 import android.os.Bundle;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import me.upp.daligz.App.app.animations.AnimatedBackground;
-import me.upp.daligz.App.app.downloader.ImageDownloader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,12 +15,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.runAnimations();
-        ImageDownloader.download(
-                API_URL,
-                findViewById(R.id.imageViewer)
-        );
-        final Button button = (Button) findViewById(R.id.buttonLoad);
-        button.setOnClickListener(view -> ImageDownloader.download(API_URL, this));
     }
 
     private void runAnimations() {
