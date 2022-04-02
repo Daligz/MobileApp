@@ -29,7 +29,6 @@ public class Connector {
                 .column(TablePosts.CATEGORY.getValue(), "VARCHAR(100) NOT NULL")
                 .primaryKey(TablePosts.ID.getValue())
                 .build();
-        System.out.println(postsTableQuery);
         new Query(this.mySQL, postsTableQuery).executeUpdateAsync();
     }
 
