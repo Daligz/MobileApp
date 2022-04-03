@@ -27,19 +27,20 @@ public class Connector {
         final String postsTableQuery = new CreateTableQuery(TablePosts.TABLE_NAME.getValue())
                 .ifNotExists()
                 .column(TablePosts.ID.getValue(), "INT AUTO_INCREMENT")
-                .column(TablePosts.URL.getValue(), "VARCHAR(100) NOT NULL")
+                .column(TablePosts.URL.getValue(), "VARCHAR(120) NOT NULL")
                 .column(TablePosts.RATE.getValue(), "INT NOT NULL")
-                .column(TablePosts.CATEGORY.getValue(), "VARCHAR(100) NOT NULL")
+                .column(TablePosts.CATEGORY.getValue(), "VARCHAR(120) NOT NULL")
                 .primaryKey(TablePosts.ID.getValue())
                 .build();
         new Query(this.mySQL, postsTableQuery).executeUpdateAsync();
     }
 
-    public ResultSet getPosts(final String amount, final String category) {
+    public ResultSet getPosts(final String category) {
         final String selectQuery = new SelectQuery(TablePosts.TABLE_NAME.getValue())
                 .column("*")
-                .where(TablePosts.CATEGORY.getValue() + " = " + category)
+                .where(TablePosts.CATEGORY.getValue() + " = '" + category + "'")
                 .build();
+        System.out.println(selectQuery);
         try {
             return new Query(this.mySQL, selectQuery).executeQuery();
         } catch (final Exception exception) {
