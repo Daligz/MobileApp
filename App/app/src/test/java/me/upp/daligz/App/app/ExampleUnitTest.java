@@ -2,11 +2,13 @@ package me.upp.daligz.App.app;
 
 import static org.junit.Assert.assertEquals;
 
-import org.json.JSONArray;
+import com.android.volley.toolbox.JsonArrayRequest;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
+import me.upp.daligz.App.app.commons.StaticData;
 import me.upp.daligz.App.app.request.ImageRequest;
 
 /**
@@ -22,22 +24,22 @@ public class ExampleUnitTest {
 
     @Test
     public void loadImage() {
-        final String result = new ImageRequest().get("http://localhost:6969/images/20/tecnology");
-        JSONArray jsonArray = null;
-        try {
-            jsonArray = new JSONArray(result);
-        } catch (final JSONException exception) {
-            exception.printStackTrace();
-        }
-        if (jsonArray == null) return;
-        for (int i = 0; i < jsonArray.length(); i++) {
-            final JSONObject jsonObject;
-            try {
-                jsonObject = jsonArray.getJSONObject(i);
-                System.out.println(jsonObject);
-            } catch (JSONException exception) {
-                exception.printStackTrace();
-            }
-        }
+        final String url = String.format("http://%s:6969/images/%s/%s", StaticData.IP, 20, "animals");
+        final JsonArrayRequest result = new ImageRequest().get(
+                url,
+                response -> {
+                    if (response == null) return;
+                    for (int i = 0; i < response.length(); i++) {
+                        final JSONObject jsonObject;
+                        try {
+                            jsonObject = response.getJSONObject(i);
+                            System.out.println(jsonObject);
+                        } catch (JSONException exception) {
+                            exception.printStackTrace();
+                        }
+                    }
+                },
+                error -> error.getCause().printStackTrace()
+        );
     }
 }

@@ -11,7 +11,11 @@ public class Service {
         Spark.port(6969);
         Spark.get("/images/:amount/:category", (request, response) -> {
             final GetImages getImages = new GetImages(Integer.parseInt(request.params(":amount")), request.params(":category"), connector);
-            return getImages.get();
+            final String get = getImages.get();
+            System.out.println(request.toString());
+            System.out.println(response.toString());
+            System.out.println(get);
+            return get;
         });
     }
 }

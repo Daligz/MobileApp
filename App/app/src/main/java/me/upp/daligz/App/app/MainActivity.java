@@ -1,8 +1,12 @@
 package me.upp.daligz.App.app;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,6 +17,7 @@ import java.util.List;
 
 import me.upp.daligz.App.app.animations.AnimatedBackground;
 import me.upp.daligz.App.app.commons.PostData;
+import me.upp.daligz.App.app.commons.StaticData;
 import me.upp.daligz.App.app.downloader.ImageDownloader;
 import me.upp.daligz.App.app.request.ImageRequest;
 
@@ -26,8 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.runAnimations();
-        this.loadImage(5, "category");
-        this.appendImages();
+        this.loadImage(5, "animals");
     }
 
     private void runAnimations() {
@@ -35,15 +39,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void appendImages() {
-        for (final PostData postData : POST_DATA_LIST) {
-            ImageDownloader.download(postData.getUrl(), this);
-        }
+        for (final PostData postData : POST_DATA_LIST) ImageDownloader.download(postData.getUrl(), this);
     }
 
     private void loadImage(final int limit, final String category) {
-        final String result = new ImageRequest().get(String.format("http://localhost:6969/images/%s/%s", limit, category));
+        final String url = String.format("http://%s:6969/images/%s/%s", StaticData.IP, limit, category);
+        final JsonArrayRequest result = new ImageRequest().get(
+                url,
+                this::execute,
+                error -> Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show()
+        );
+        Volley.newRequestQueue(this).add(result);
+    }
+
+    private void execute(final JSONArray jsonArray) {
         try {
-            final JSONArray jsonArray = new JSONArray(result);
             for (int i = 0; i < jsonArray.length(); i++) {
                 final JSONObject jsonObject = jsonArray.getJSONObject(i);
                 POST_DATA_LIST.add(new PostData(
@@ -55,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
             }
         } catch (final JSONException exception) {
             exception.printStackTrace();
+            Toast.makeText(this, exception.toString(), Toast.LENGTH_LONG).show();
         }
+        this.appendImages();
     }
 }
