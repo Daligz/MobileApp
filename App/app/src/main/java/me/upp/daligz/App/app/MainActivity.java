@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import me.upp.daligz.App.app.animations.AnimatedBackground;
+import me.upp.daligz.App.app.request.ImageRequest;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,5 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void runAnimations() {
         new AnimatedBackground(this).run();
+    }
+
+    private void loadImage() {
+        final String result = new ImageRequest().get("http://localhost:6969/images/20/tecnology");
     }
 }
