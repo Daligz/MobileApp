@@ -39,4 +39,6 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    testImplementation 'org.json:json:20140107'
 }
