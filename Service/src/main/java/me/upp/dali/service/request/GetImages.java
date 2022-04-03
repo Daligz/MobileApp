@@ -18,7 +18,7 @@ public class GetImages implements Request {
         final ResultSet posts = this.connector.getPosts(this.category);
         if (posts == null) return "";
         try {
-            return JsonUtils.toJSON(posts).toString();
+            return JsonUtils.toJSON(posts, this.amount).toString();
         } catch (final Exception exception) {
             exception.printStackTrace();
         }
